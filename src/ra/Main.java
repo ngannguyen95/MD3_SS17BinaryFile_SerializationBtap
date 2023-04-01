@@ -78,6 +78,9 @@ public class Main {
         File file = null;
         try {
             file = new File(path);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(products);
@@ -96,7 +99,7 @@ public class Main {
         File file = null;
         try {
             file = new File(path);
-            if (file.exists()) {
+            if (!file.exists()) {
                 fis = new FileInputStream(file);
                 ois = new ObjectInputStream(fis);
                 products = (List<Product>) ois.readObject();
