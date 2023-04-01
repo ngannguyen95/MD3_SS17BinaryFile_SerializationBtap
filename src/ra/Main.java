@@ -62,13 +62,14 @@ public class Main {
             System.out.println(pd);
         }
     }
-    public static void search(){
+
+    public static void search() {
         System.out.println("Nhập vào tên cần tìm kiếm: ");
-        String nameSearch=scanner.nextLine();
-        for (Product product: listProduct) {
-           if (product.getProductName().equals(nameSearch)){
-               product.displayData();
-           }
+        String nameSearch = scanner.nextLine();
+        for (Product product : listProduct) {
+            if (product.getProductName().equals(nameSearch)) {
+                product.displayData();
+            }
         }
     }
 
@@ -80,7 +81,8 @@ public class Main {
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(products);
-
+            fos.close();
+            oos.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -98,6 +100,8 @@ public class Main {
                 fis = new FileInputStream(file);
                 ois = new ObjectInputStream(fis);
                 products = (List<Product>) ois.readObject();
+                fis.close();
+                ois.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
